@@ -25,6 +25,6 @@ for i in range(intentosTotal):
             pierde = False;
             break;
     except:
-        print("Ingresa carácteres validos");
+        print("Ingresa carácteres validos, por favor repitelo:\n");
 if pierde:
     print("!Oh¡ has perdido, el número era ", ran , "\n");
