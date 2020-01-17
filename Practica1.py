@@ -6,7 +6,9 @@ numeroUser = 0;
 pierde = True;
 ran = random.randrange(1,21,1);
 
+
 nombre = input("Como te llamas?\n");
+
 print('Hola '+nombre+'!\n');
 
 print("Estoy pensando en un numero del 1 al 20 Podras adivinarlo?:\n");
