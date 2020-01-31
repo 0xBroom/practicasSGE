@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask import request
 
 from flask_sqlalchemy import SQLAlchemy
@@ -29,6 +29,22 @@ def home():
         db.session.commit()
     tareas = Tarea.query.all()
     return render_template("home.html", tareas=tareas)
+
+@app.route("/delete", methods=["POST"])
+def delete():
+    id_ = request.form.get("id")
+    print("Hello", id_, sep="---")
+    tarea = Tarea.query.filter_by(id=id_).first()
+    print("Hello", tarea, sep="---")
+    db.session.delete(tarea)
+    db.session.commit()
+    return redirect("/")
+
+@app.route("/update", methods=["POST"])
+    id_ = request.form.get("id")
+    db.session.update()
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
