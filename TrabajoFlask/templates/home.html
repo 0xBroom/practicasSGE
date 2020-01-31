@@ -34,9 +34,11 @@
     <tr>
       <td>Tarea 2</td>
     </tr>
-    <tr>
-      <td>Tarea 3</td>
-    </tr>
+    {% for tarea in tareas %}
+      <tr>
+          <td>{{book.title}}</td>td>
+      </tr>
+    {% endfor %}
   </tbody>
 </table>
     
