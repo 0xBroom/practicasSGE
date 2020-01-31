@@ -28,25 +28,32 @@
     </tr>
   </thead>
   <tbody align="center">
-    <tr>
-      <td>Tarea 1</td>
-    </tr>
-    <tr>
-      <td>Tarea 2</td>
-    </tr>
     {% for tarea in tareas %}
       <tr>
-          <td>            
-            {{tarea.nombre}}
-              <!-- $_POST['TerminaOBorra'] se hará un if para ver si está terminado o se borra -->   
-              <form method="POST" action="./update" class="text-center">
-                <input width="50%" type="hidden" class="form-control" name="id" value="{{tarea.id}}">
-                <button type="submit" name="TerminaOBorra" value="terminado" class="btn btn-success">Marcar Terminada</button>
-              </form>
-              <form method="POST" action="./delete" class="text-center">
-                <input width="50%" type="hidden" class="form-control" name="id" value="{{tarea.id}}">
-                <button type="submit" name="TerminaOBorra" value="borrado" class="btn btn-danger">Eliminar</button>
-             </form>
+          <td>
+              
+              <table class="table">
+                  {% if tarea.marcado == 0 %}
+                    <tr>{{tarea.nombre}}</tr>        
+                  {% endif %}
+                  {% if tarea.marcado == 1 %}
+                    <tr><strike>{{tarea.nombre}}</strike></tr>        
+                  {% endif %}
+                    <tr>&nbsp;&nbsp;&nbsp;&nbsp;</tr>
+
+                  <!-- $_POST['TerminaOBorra'] se hará un if para ver si está terminado o se borra -->   
+                  <tr><form method="POST" action="./update" class="text-center">
+                    <input width="50%" type="hidden" class="form-control" name="tarea" value="{{tarea.id}}" disabled>
+                    <button type="submit" name="TerminaOBorra" value="terminado" class="btn btn-success">Marcar Terminada</button>
+
+                  </form>&nbsp;</tr>
+                  <tr><form method="POST" action="./delete" class="text-center">
+                    <input width="50%" type="hidden" class="form-control" name="tarea" value="{{tarea.id}}" disabled>
+                    <button type="submit" name="TerminaOBorra" value="borrado" class="btn btn-danger">Eliminar</button>
+                 </form></tr>
+                  
+              </table>
+                  
           </td>
       </tr>
     {% endfor %}
