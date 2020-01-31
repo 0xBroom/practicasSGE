@@ -28,25 +28,26 @@
     </tr>
   </thead>
   <tbody align="center">
-    <tr>
-      <td>Tarea 1</td>
-    </tr>
-    <tr>
-      <td>Tarea 2</td>
-    </tr>
     {% for tarea in tareas %}
       <tr>
-          <td>            
-            {{tarea.nombre}}
+          <td>
+              
+              <table class="table">
+            <tr>{{tarea.nombre}}</tr><tr>&nbsp;&nbsp;&nbsp;&nbsp;</tr>
+                  
               <!-- $_POST['TerminaOBorra'] se hará un if para ver si está terminado o se borra -->   
-              <form method="POST" action="./update" class="text-center">
+              <tr><form method="POST" action="./update" class="text-center">
                 <input width="50%" type="hidden" class="form-control" name="tarea" value="{{tarea.id}}" disabled>
                 <button type="submit" name="TerminaOBorra" value="terminado" class="btn btn-success">Marcar Terminada</button>
-              </form>
-              <form method="POST" action="./delete" class="text-center">
+                  
+              </form>&nbsp;</tr>
+              <tr><form method="POST" action="./delete" class="text-center">
                 <input width="50%" type="hidden" class="form-control" name="tarea" value="{{tarea.id}}" disabled>
                 <button type="submit" name="TerminaOBorra" value="borrado" class="btn btn-danger">Eliminar</button>
-             </form>
+             </form></tr>
+                  
+              </table>
+                  
           </td>
       </tr>
     {% endfor %}
