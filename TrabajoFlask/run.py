@@ -36,9 +36,7 @@ def home():
 @app.route("/delete", methods=["POST"])
 def delete():
     id_ = request.form.get("id")
-    print("Hello", id_, sep="---")
     tarea = Tarea.query.filter_by(id=id_).first()
-    print("Hello", tarea, sep="---")
     db.session.delete(tarea)
     db.session.commit()
     return redirect("/")
