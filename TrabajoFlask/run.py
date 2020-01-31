@@ -18,6 +18,7 @@ db = SQLAlchemy(app)
 class Tarea(db.Model):
     id = db.Column(db.Integer, unique =True, nullable=False, primary_key=True)
     nombre = db.Column(db.String(80), unique=False, nullable=False, primary_key=False)
+    marcado = db.Column(db.Integer, unique=False, nullable= False, primary_key= False)
 
     def __repr__(self):
         return "<Nombre: {}>".format(self.nombre)
@@ -25,7 +26,9 @@ class Tarea(db.Model):
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.form:
-        db.session.add(Tarea(nombre=request.form.get("tarea")))
+        tarea = Tarea(nombre=request.form.get("tarea"))
+        tarea.marcado = 0
+        db.session.add(tarea)
         db.session.commit()
     tareas = Tarea.query.all()
     return render_template("home.html", tareas=tareas)
@@ -41,9 +44,12 @@ def delete():
     return redirect("/")
 
 @app.route("/update", methods=["POST"])
+def update():
     id_ = request.form.get("id")
-    db.session.update()
-
+    tarea = Tarea.query.filter_by(id=id_).first()
+    tarea.marcado = 1
+    db.session.commit()
+    return redirect ("/")
 
 if __name__ == '__main__':
     app.run(debug=True)
