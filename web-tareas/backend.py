@@ -14,9 +14,9 @@ def home():
 #     else:
 #         return render_template("login.html")
 
-# @app.route("/<usr>")
-# def user(usr):
-#     return f"<h1>{usr}</h1>"
+@app.route("/<usr>")
+def user(usr):
+    return usr
 
 
 if __name__ == "__main__":
