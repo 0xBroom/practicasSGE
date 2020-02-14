@@ -14,7 +14,9 @@ app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 
 db = SQLAlchemy(app)
 
-
+''' 
+Inicializamos la base de datos.
+'''
 class Tarea(db.Model):
     id = db.Column(db.Integer, unique =True, nullable=False, primary_key=True)
     nombre = db.Column(db.String(80), unique=False, nullable=False, primary_key=False)
@@ -23,6 +25,10 @@ class Tarea(db.Model):
     def __repr__(self):
         return "<Nombre: {}>".format(self.nombre)
 
+'''
+Ruta por defecto, antes de mostrar la vista verificará la base de datos
+en busca de un nuevo elemento en la lista.
+'''
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.form:
@@ -33,6 +39,9 @@ def home():
     tareas = Tarea.query.all()
     return render_template("home.html", tareas=tareas)
 
+'''
+Maneja la eliminación de la tarea de la base de datos, por id.
+'''
 @app.route("/delete", methods=["POST"])
 def delete():
     id_ = request.form.get("id")
@@ -41,6 +50,9 @@ def delete():
     db.session.commit()
     return redirect("/")
 
+'''
+Actualiza el campo marcado de la base de datos que hará que en la vista esta tarea se tache.
+'''
 @app.route("/update", methods=["POST"])
 def update():
     id_ = request.form.get("id")
